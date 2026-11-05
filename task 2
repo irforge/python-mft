@@ -1,0 +1,135 @@
+board = "123456789"
+khat = "--+---+--"
+
+print("________________doooz________________")
+print("Positions:")
+print()
+print(" 1 | 2 | 3")
+print("---+---+---")
+print(" 4 | 5 | 6")
+print("---+---+---")
+print(" 7 | 8 | 9")
+print()
+print()
+
+move = input("player X, choose (1-9): ")
+if len(move) == 1 and move.isdigit() and move in board:
+    board = board.replace(move, "X")
+print(" | ".join(board[0:3]))
+print(khat)
+print(" | ".join(board[3:6]))
+print(khat)
+print(" | ".join(board[6:9]))
+print()
+
+move = input("player O, choose (1-9): ")
+if len(move) == 1 and move.isdigit() and move in board:
+    board = board.replace(move, "O")
+print(" | ".join(board[0:3]))
+print(khat)
+print(" | ".join(board[3:6]))
+print(khat)
+print(" | ".join(board[6:9]))
+print()
+
+move = input("player X, choose (1-9): ")
+if len(move) == 1 and move.isdigit() and move in board:
+    board = board.replace(move, "X")
+print(" | ".join(board[0:3]))
+print(khat)
+print(" | ".join(board[3:6]))
+print(khat)
+print(" | ".join(board[6:9]))
+print()
+
+move = input("player O, choose (1-9): ")
+if len(move) == 1 and move.isdigit() and move in board:
+    board = board.replace(move, "O")
+print(" | ".join(board[0:3]))
+print(khat)
+print(" | ".join(board[3:6]))
+print(khat)
+print(" | ".join(board[6:9]))
+print()
+
+move = input("player X, choose (1-9): ")
+if len(move) == 1 and move.isdigit() and move in board:
+    board = board.replace(move, "X")
+print(" | ".join(board[0:3]))
+print(khat)
+print(" | ".join(board[3:6]))
+print(khat)
+print(" | ".join(board[6:9]))
+print()
+
+
+lines = (board[0:3], board[3:6], board[6:9], board[0::3], board[1::3],
+         board[2::3], board[0::4], board[2:7:2])
+
+
+if "X" * 3 in lines:
+    print("Player X wins!")
+    exit()
+
+move = input("player O, choose (1-9): ")
+if len(move) == 1 and move.isdigit() and move in board:
+    board = board.replace(move, "O")
+print(" | ".join(board[0:3]))
+print(khat)
+print(" | ".join(board[3:6]))
+print(khat)
+print(" | ".join(board[6:9]))
+print()
+lines = (board[0:3], board[3:6], board[6:9], board[0::3], board[1::3],
+         board[2::3], board[0::4], board[2:7:2])
+if "O" * 3 in lines:
+    print("Player O wins!")
+    exit()
+
+
+move = input("player X, choose (1-9): ")
+if len(move) == 1 and move.isdigit() and move in board:
+    board = board.replace(move, "X")
+print(" | ".join(board[0:3]))
+print(khat)
+print(" | ".join(board[3:6]))
+print(khat)
+print(" | ".join(board[6:9]))
+print()
+lines = (board[0:3], board[3:6], board[6:9], board[0::3], board[1::3],
+         board[2::3], board[0::4], board[2:7:2])
+if "X" * 3 in lines:
+    print("Player X wins!")
+    exit()
+
+move = input("player O, choose (1-9): ")
+if len(move) == 1 and move.isdigit() and move in board:
+    board = board.replace(move, "O")
+print(" | ".join(board[0:3]))
+print(khat)
+print(" | ".join(board[3:6]))
+print(khat)
+print(" | ".join(board[6:9]))
+print()
+lines = (board[0:3], board[3:6], board[6:9], board[0::3], board[1::3],
+         board[2::3], board[0::4], board[2:7:2])
+if "O" * 3 in lines:
+    print("Player O wins!")
+    exit()
+
+move = input("player X, choose (1-9): ")
+if len(move) == 1 and move.isdigit() and move in board:
+    board = board.replace(move, "X")
+print(" | ".join(board[0:3]))
+print(khat)
+print(" | ".join(board[3:6]))
+print(khat)
+print(" | ".join(board[6:9]))
+print()
+lines = (board[0:3], board[3:6], board[6:9], board[0::3], board[1::3],
+         board[2::3], board[0::4], board[2:7:2])
+if "X" * 3 in lines:
+    print("Player X wins!")
+    exit()
+
+print("It's a draw!")
