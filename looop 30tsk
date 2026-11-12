@@ -1,0 +1,1964 @@
+task = input("Which task do you want to run? (1-30): ").strip()
+print()
+
+# ---------- 1 ----------
+if task == "1":
+    wrong_tries = 0
+
+    while True:
+        name = input("Enter your name: ")
+
+        if name == "":
+            print("Name can't be empty!")
+            wrong_tries += 1
+
+        if name[0] == " " or name[-1] == " ":
+            print("Name shouldn't start or end with a space.")
+            wrong_tries += 1
+
+        if len(name) < 3:
+            print("Name is too short (at least 3 characters).")
+            wrong_tries += 1
+
+        if len(name) > 30:
+            print("Name is too long (max 30 characters).")
+            wrong_tries += 1
+
+        has_number = False
+        for ch in name:
+            if ch.isdigit():
+                has_number = True
+                break
+
+        if has_number:
+            print("Name can't have numbers in it.")
+            wrong_tries += 1
+            
+        break
+
+    print()
+    print("Welcome,", name + "!")
+    print("Invalid attempts:", wrong_tries)
+
+
+# ---------- 2 ----------
+elif task == "2":
+    valid_count = 0
+    invalid_count = 0
+    valid_numbers = ""
+
+    for i in range(1, 6):
+        phone = input("Phone number " + str(i) + ": ").strip()
+
+        if len(phone) == 11 and phone.isdigit() and phone.startswith("09"):
+            print("OK")
+            valid_count += 1
+            valid_numbers = valid_numbers + phone + "\n"
+        else:
+            print("Not valid")
+            invalid_count += 1
+
+    print()
+    print("Valid numbers:", valid_count)
+    print("Invalid numbers:", invalid_count)
+
+    if valid_count > 0:
+        print("Here are the valid ones:")
+        print(valid_numbers, end="")
+
+
+# ---------- 3 ----------
+elif task == "3":
+    correct_password = "alidara.123"
+    chances = 5
+
+    while chances > 0:
+        password = input("Password: ")
+
+        if password == correct_password:
+            print("Login successful. Welcome back!")
+            break
+
+        chances -= 1
+        if chances > 0:
+            print("Wrong password. Chances left:", chances)
+        else:
+            print("Wrong password. Your account is locked!")
+
+
+# ---------- 4 ----------
+elif task == "4":
+    username = input("Username: ")
+
+    letters = 0
+    digits = 0
+    specials = 0
+    spaces = 0
+
+    for ch in username:
+        if ("a" <= ch <= "z") or ("A" <= ch <= "Z"):
+            letters += 1
+        elif ch.isdigit():
+            digits += 1
+        elif ch == " ":
+            spaces += 1
+        else:
+            specials += 1
+
+    print("Letters:", letters)
+    print("Numbers:", digits)
+    print("Special characters:", specials)
+    print("Spaces:", spaces)
+
+
+# ---------- 5 ----------
+elif task == "5":
+    strong = 0
+    weak = 0
+
+    for i in range(1, 6):
+        password = input("Password " + str(i) + ": ")
+
+        has_letter = False
+        has_digit = False
+        has_upper = False
+        has_lower = False
+        has_space = False
+
+        for ch in password:
+            if ch.isalpha():
+                has_letter = True
+            if ch.isdigit():
+                has_digit = True
+            if ch.isupper():
+                has_upper = True
+            if ch.islower():
+                has_lower = True
+            if ch == " ":
+                has_space = True
+
+        problems = ""
+        if len(password) < 8:
+            problems += " | less than 8 chars"
+        if not has_letter:
+            problems += " | no letter"
+        if not has_digit:
+            problems += " | no number"
+        if not has_upper:
+            problems += " | no uppercase"
+        if not has_lower:
+            problems += " | no lowercase"
+        if has_space:
+            problems += " | has space"
+
+        if problems == "":
+            print("Strong password")
+            strong += 1
+        else:
+            print("Weak password" + problems)
+            weak += 1
+
+    print()
+    print("Strong passwords:", strong)
+    print("Weak passwords:", weak)
+
+
+# ---------- 6 ----------
+elif task == "6":
+    print("Sign up - fill in the fields one by one")
+    print()
+
+    while True:
+        first_name = input("First name: ").strip()
+        has_digit = False
+        for ch in first_name:
+            if ch.isdigit():
+                has_digit = True
+
+        if first_name == "":
+            print("First name can't be empty.")
+        elif has_digit:
+            print("First name can't contain numbers.")
+        elif len(first_name) < 2:
+            print("First name is too short.")
+        else:
+            break
+
+    while True:
+        last_name = input("Last name: ").strip()
+        has_digit = False
+        for ch in last_name:
+            if ch.isdigit():
+                has_digit = True
+
+        if last_name == "":
+            print("Last name can't be empty.")
+        elif has_digit:
+            print("Last name can't contain numbers.")
+        elif len(last_name) < 2:
+            print("Last name is too short.")
+        else:
+            break
+
+    while True:
+        phone = input("Phone number: ").strip()
+        if len(phone) != 11:
+            print("Phone number must be 11 digits.")
+        elif not phone.isdigit():
+            print("Phone number should only have digits.")
+        elif not phone.startswith("09"):
+            print("Phone number must start with 09.")
+        else:
+            break
+
+    while True:
+        email = input("Email: ").strip()
+        if email == "":
+            print("Email can't be empty.")
+            continue
+
+        at_index = email.find("@")
+
+        if email.count("@") != 1:
+            print("Email must have exactly one @.")
+        elif " " in email:
+            print("Email can't have spaces.")
+        elif email[0] == "@" or email[0] == "." or email[-1] == "@" or email[-1] == ".":
+            print("Email can't start or end with @ or dot.")
+        elif email[at_index + 1] == "." or "." not in email[at_index + 1:]:
+            print("There should be a dot in the domain part (like gmail.com).")
+        else:
+            break
+
+    while True:
+        username = input("Username: ").strip()
+        if len(username) < 5 or len(username) > 20:
+            print("Username must be between 5 and 20 characters.")
+        elif " " in username:
+            print("Username can't have spaces.")
+        elif username[0].isdigit():
+            print("Username can't start with a number.")
+        else:
+            break
+
+    while True:
+        password = input("Password: ")
+        has_letter = False
+        has_digit = False
+        for ch in password:
+            if ch.isalpha():
+                has_letter = True
+            elif ch.isdigit():
+                has_digit = True
+
+        if len(password) < 8:
+            print("Password must be at least 8 characters.")
+        elif " " in password:
+            print("Password can't have spaces.")
+        elif not has_letter or not has_digit:
+            print("Password needs both letters and numbers.")
+        else:
+            break
+
+    print()
+    print("Registration completed successfully!")
+    print("Name:", first_name, last_name)
+    print("Phone:", phone)
+    print("Email:", email)
+    print("Username:", username)
+
+
+# ---------- 7 ----------
+elif task == "7":
+    correct_otp = "583214"
+    chances = 3
+
+    while chances > 0:
+        otp = input("Enter the OTP code: ").strip()
+        chances -= 1
+
+        if len(otp) != 6:
+            print("OTP must be exactly 6 digits.")
+        elif not otp.isdigit():
+            print("OTP can only contain numbers.")
+        elif otp != correct_otp:
+            print("Wrong code.")
+        else:
+            print("Code verified. You're in!")
+            break
+
+        if chances > 0:
+            print("Chances left:", chances)
+        else:
+            print("Authentication failed. No chances left.")
+
+
+# ---------- 8 ----------
+elif task == "8":
+    valid = 0
+    invalid = 0
+    bad_length = 0
+    bad_chars = 0
+
+    for i in range(1, 11):
+        code = input("National code " + str(i) + ": ").strip()
+
+        if code == "":
+            print("Empty!")
+            invalid += 1
+        elif not code.isdigit():
+            print("Only numbers are allowed.")
+            invalid += 1
+            bad_chars += 1
+        elif len(code) != 10:
+            print("It must be exactly 10 digits.")
+            invalid += 1
+            bad_length += 1
+        elif code.count(code[0]) == 10:
+            print("All digits are the same, that's not a real code.")
+            invalid += 1
+        else:
+            print("OK")
+            valid += 1
+
+    print()
+    print("Valid codes:", valid)
+    print("Invalid codes:", invalid)
+    print("Rejected because of length:", bad_length)
+    print("Rejected because of non-digit characters:", bad_chars)
+
+
+# ---------- 9 ----------
+elif task == "9":
+    correct_username = "admin"
+    correct_password = "admin1234"
+
+    attempts = 0
+    logged_in = False
+
+    while attempts < 3:
+        username = input("Username: ").strip()
+        password = input("Password: ")
+
+        if username == "":
+            print("Username is empty!")
+        elif password == "":
+            print("Password is empty!")
+        elif username != correct_username:
+            print("This username doesn't exist.")
+        elif password != correct_password:
+            print("Password is wrong.")
+        else:
+            logged_in = True
+            print("Login successful. Welcome,", username)
+            break
+
+        attempts += 1
+        if attempts < 3:
+            print("Attempts left:", 3 - attempts)
+
+    if not logged_in:
+        print("3 failed attempts. Your account is locked.")
+
+
+# ---------- 10 ----------
+elif task == "10":
+    email = input("Email: ").strip()
+
+    letters = 0
+    digits = 0
+    dots = 0
+    at_signs = 0
+    spaces = 0
+    dot_after_at = False
+
+    for ch in email:
+        if ch.isalpha():
+            letters += 1
+        elif ch.isdigit():
+            digits += 1
+        elif ch == ".":
+            dots += 1
+            if at_signs > 0:
+                dot_after_at = True
+        elif ch == "@":
+            at_signs += 1
+        elif ch == " ":
+            spaces += 1
+
+    print("Letters:", letters)
+    print("Numbers:", digits)
+    print("Dots:", dots)
+    print("@ signs:", at_signs)
+    print()
+
+    is_valid = True
+    if email == "":
+        print("- Email is empty.")
+        is_valid = False
+    else:
+        if at_signs != 1:
+            print("- Email must have exactly one @.")
+            is_valid = False
+        if not dot_after_at:
+            print("- There's no dot after the @.")
+            is_valid = False
+        if spaces > 0:
+            print("- Email has spaces.")
+            is_valid = False
+        if email[0] == "@" or email[0] == ".":
+            print("- Email can't start with @ or dot.")
+            is_valid = False
+        if email[-1] == "@" or email[-1] == ".":
+            print("- Email can't end with @ or dot.")
+            is_valid = False
+
+    if is_valid:
+        print("Email is valid.")
+    else:
+        print("Email is NOT valid.")
+
+
+# ---------- 11 ----------
+elif task == "11":
+    first1 = ""
+    last1 = ""
+    phone1 = ""
+    first2 = ""
+    last2 = ""
+    phone2 = ""
+    first3 = ""
+    last3 = ""
+    phone3 = ""
+    first4 = ""
+    last4 = ""
+    phone4 = ""
+    first5 = ""
+    last5 = ""
+    phone5 = ""
+
+    for i in range(1, 6):
+        print("--- Contact", i, "---")
+
+        while True:
+            first = input("First name: ").strip()
+            has_digit = False
+            for ch in first:
+                if ch.isdigit():
+                    has_digit = True
+            if first == "":
+                print("First name can't be empty.")
+            elif has_digit:
+                print("First name can't have numbers.")
+            else:
+                break
+
+        while True:
+            last = input("Last name: ").strip()
+            has_digit = False
+            for ch in last:
+                if ch.isdigit():
+                    has_digit = True
+            if last == "":
+                print("Last name can't be empty.")
+            elif has_digit:
+                print("Last name can't have numbers.")
+            else:
+                break
+
+        while True:
+            phone = input("Phone: ").strip()
+            if len(phone) == 11 and phone.isdigit() and phone.startswith("09"):
+                break
+            print("Phone must be 11 digits and start with 09.")
+
+        if i == 1:
+            first1 = first
+            last1 = last
+            phone1 = phone
+        elif i == 2:
+            first2 = first
+            last2 = last
+            phone2 = phone
+        elif i == 3:
+            first3 = first
+            last3 = last
+            phone3 = phone
+        elif i == 4:
+            first4 = first
+            last4 = last
+            phone4 = phone
+        else:
+            first5 = first
+            last5 = last
+            phone5 = phone
+
+    print()
+    print("All contacts:")
+    print("1.", first1, last1, "-", phone1)
+    print("2.", first2, last2, "-", phone2)
+    print("3.", first3, last3, "-", phone3)
+    print("4.", first4, last4, "-", phone4)
+    print("5.", first5, last5, "-", phone5)
+
+
+# ---------- 12 ----------
+elif task == "12":
+    name1 = "Ali"
+    phone1 = "09121111111"
+    name2 = "Sara"
+    phone2 = "09122222222"
+    name3 = "Reza"
+    phone3 = "09123333333"
+    name4 = "Maryam"
+    phone4 = "09124444444"
+    name5 = "Hamed"
+    phone5 = "09125555555"
+
+    while True:
+        search = input("Who are you looking for? (type exit to quit): ").strip()
+
+        if search.lower() == "exit":
+            print("Bye!")
+            break
+
+        s = search.lower()
+        if s == name1.lower():
+            print(name1, "->", phone1)
+        elif s == name2.lower():
+            print(name2, "->", phone2)
+        elif s == name3.lower():
+            print(name3, "->", phone3)
+        elif s == name4.lower():
+            print(name4, "->", phone4)
+        elif s == name5.lower():
+            print(name5, "->", phone5)
+        else:
+            print("No contact found with this name.")
+
+
+# ---------- 13 ----------
+elif task == "13":
+    p1 = ""
+    p2 = ""
+    p3 = ""
+    p4 = ""
+    p5 = ""
+    count = 0
+
+    while count < 5:
+        phone = input("Phone number " + str(count + 1) + ": ").strip()
+
+        if len(phone) != 11 or not phone.isdigit() or not phone.startswith("09"):
+            print("Invalid number, try again.")
+            continue
+
+        if phone == p1 or phone == p2 or phone == p3 or phone == p4 or phone == p5:
+            print("You already entered this one. Give me a different number.")
+            continue
+
+        count += 1
+        if count == 1:
+            p1 = phone
+        elif count == 2:
+            p2 = phone
+        elif count == 3:
+            p3 = phone
+        elif count == 4:
+            p4 = phone
+        else:
+            p5 = phone
+
+    print()
+    print("Done! 5 unique numbers saved:")
+    print(p1)
+    print(p2)
+    print(p3)
+    print(p4)
+    print(p5)
+
+
+# ---------- 14 ----------
+elif task == "14":
+    name = "Ali Ahmadi"
+    phone = "09123456789"
+    email = "ali@gmail.com"
+
+    while True:
+        print()
+        print("1. Edit name")
+        print("2. Edit phone")
+        print("3. Edit email")
+        print("4. Show info")
+        print("5. Exit")
+        choice = input("Choose: ").strip()
+
+        if choice == "1":
+            new_name = input("New name (leave empty to keep it): ").strip()
+            if new_name == "":
+                print("Nothing changed.")
+            else:
+                has_digit = False
+                for ch in new_name:
+                    if ch.isdigit():
+                        has_digit = True
+                if has_digit or len(new_name) < 3:
+                    print("Invalid name. It must be at least 3 letters with no numbers.")
+                else:
+                    name = new_name
+                    print("Name updated.")
+
+        elif choice == "2":
+            new_phone = input("New phone (leave empty to keep it): ").strip()
+            if new_phone == "":
+                print("Nothing changed.")
+            elif len(new_phone) == 11 and new_phone.isdigit() and new_phone.startswith("09"):
+                phone = new_phone
+                print("Phone updated.")
+            else:
+                print("Invalid phone. It must be 11 digits and start with 09.")
+
+        elif choice == "3":
+            new_email = input("New email (leave empty to keep it): ").strip()
+            if new_email == "":
+                print("Nothing changed.")
+            else:
+                at_index = new_email.find("@")
+                if (new_email.count("@") == 1 and " " not in new_email
+                        and new_email[0] != "@" and new_email[0] != "."
+                        and new_email[-1] != "@" and new_email[-1] != "."
+                        and "." in new_email[at_index + 1:]):
+                    email = new_email
+                    print("Email updated.")
+                else:
+                    print("Invalid email.")
+
+        elif choice == "4":
+            print("Name: ", name)
+            print("Phone:", phone)
+            print("Email:", email)
+
+        elif choice == "5":
+            print("Bye!")
+            break
+
+        else:
+            print("Please choose a number between 1 and 5.")
+
+
+# ---------- 15 ----------
+elif task == "15":
+    name1 = "Ali"
+    phone1 = "09121111111"
+    name2 = "Sara"
+    phone2 = "09122222222"
+    name3 = "Reza"
+    phone3 = "09123333333"
+
+    while True:
+        print()
+        print("1. Delete a contact")
+        print("2. Show contacts")
+        print("3. Exit")
+        choice = input("Choose: ").strip()
+
+        if choice == "1":
+            target = input("Contact name: ").strip().lower()
+            if target == "":
+                print("You didn't type a name.")
+                continue
+
+            which = 0
+            if name1 != "" and target == name1.lower():
+                which = 1
+            elif name2 != "" and target == name2.lower():
+                which = 2
+            elif name3 != "" and target == name3.lower():
+                which = 3
+
+            if which == 0:
+                print("There's no contact with this name.")
+                continue
+
+            while True:
+                answer = input("Are you sure you want to delete it? (y/n): ")
+                if answer == "y" or answer == "Y" or answer == "n" or answer == "N":
+                    break
+                print("Just y or n please.")
+
+            if answer == "y" or answer == "Y":
+                if which == 1:
+                    name1 = ""
+                    phone1 = ""
+                elif which == 2:
+                    name2 = ""
+                    phone2 = ""
+                else:
+                    name3 = ""
+                    phone3 = ""
+                print("Contact deleted.")
+            else:
+                print("OK, nothing was deleted.")
+
+        elif choice == "2":
+            if name1 == "" and name2 == "" and name3 == "":
+                print("No contacts left.")
+            if name1 != "":
+                print(name1, "-", phone1)
+            if name2 != "":
+                print(name2, "-", phone2)
+            if name3 != "":
+                print(name3, "-", phone3)
+
+        elif choice == "3":
+            print("Bye!")
+            break
+
+        else:
+            print("Invalid option.")
+
+
+# ---------- 16 ----------
+elif task == "16":
+    user1 = ""
+    pass1 = ""
+    pin1 = ""
+    user2 = ""
+    pass2 = ""
+    pin2 = ""
+    user3 = ""
+    pass3 = ""
+    pin3 = ""
+    user4 = ""
+    pass4 = ""
+    pin4 = ""
+    user5 = ""
+    pass5 = ""
+    pin5 = ""
+
+    count = 0
+    while count < 5:
+        print()
+        print("--- User", count + 1, "---")
+
+        while True:
+            username = input("Username: ").strip()
+            u = username.lower()
+            if len(username) < 5 or len(username) > 20:
+                print("Username must be between 5 and 20 characters.")
+            elif username[0].isdigit():
+                print("Username can't start with a number.")
+            elif u == user1.lower() or u == user2.lower() or u == user3.lower() or u == user4.lower() or u == user5.lower():
+                print("This username is already taken.")
+            else:
+                break
+
+        while True:
+            password = input("Password: ")
+            has_letter = False
+            has_digit = False
+            for ch in password:
+                if ch.isalpha():
+                    has_letter = True
+                elif ch.isdigit():
+                    has_digit = True
+
+            if len(password) < 8:
+                print("Password must be at least 8 characters.")
+            elif not has_letter or not has_digit:
+                print("Password needs both letters and numbers.")
+            else:
+                confirm = input("Confirm password: ")
+                if confirm == password:
+                    break
+                print("Passwords don't match. Let's try again.")
+
+        while True:
+            pin = input("PIN (4 digits): ").strip()
+            if len(pin) == 4 and pin.isdigit():
+                break
+            print("PIN must be exactly 4 digits.")
+
+        count += 1
+        if count == 1:
+            user1 = username
+            pass1 = password
+            pin1 = pin
+        elif count == 2:
+            user2 = username
+            pass2 = password
+            pin2 = pin
+        elif count == 3:
+            user3 = username
+            pass3 = password
+            pin3 = pin
+        elif count == 4:
+            user4 = username
+            pass4 = password
+            pin4 = pin
+        else:
+            user5 = username
+            pass5 = password
+            pin5 = pin
+        print("User", username, "registered.")
+
+    print()
+    print("Registration finished! Registered users:")
+    print(user1, user2, user3, user4, user5, sep=", ")
+
+
+# ---------- 17 ----------
+elif task == "17":
+    user1 = "ali_dev"
+    pass1 = "ali12345"
+    user2 = "sara99"
+    pass2 = "sara2024"
+    user3 = "reza_m"
+    pass3 = "reza0000"
+
+    fails1 = 0
+    fails2 = 0
+    fails3 = 0
+    unknown_fails = 0
+
+    while True:
+        if fails1 >= 3 and fails2 >= 3 and fails3 >= 3:
+            print("All accounts are locked.")
+            break
+
+        username = input("Username (or exit): ").strip()
+        if username == "exit":
+            break
+        password = input("Password: ")
+
+        if username == user1:
+            if fails1 >= 3:
+                print("This account is locked.")
+            elif password == pass1:
+                print("Welcome,", user1 + "!")
+                break
+            else:
+                fails1 += 1
+                if fails1 == 3:
+                    print("Wrong password. This account is now locked.")
+                else:
+                    print("Wrong password. Attempts left:", 3 - fails1)
+
+        elif username == user2:
+            if fails2 >= 3:
+                print("This account is locked.")
+            elif password == pass2:
+                print("Welcome,", user2 + "!")
+                break
+            else:
+                fails2 += 1
+                if fails2 == 3:
+                    print("Wrong password. This account is now locked.")
+                else:
+                    print("Wrong password. Attempts left:", 3 - fails2)
+
+        elif username == user3:
+            if fails3 >= 3:
+                print("This account is locked.")
+            elif password == pass3:
+                print("Welcome,", user3 + "!")
+                break
+            else:
+                fails3 += 1
+                if fails3 == 3:
+                    print("Wrong password. This account is now locked.")
+                else:
+                    print("Wrong password. Attempts left:", 3 - fails3)
+
+        else:
+            unknown_fails += 1
+            print("Username or password is wrong.")
+            if unknown_fails == 3:
+                print("Too many failed attempts. Login stopped.")
+                break
+
+
+# ---------- 18 ----------
+elif task == "18":
+    username = input("First, your username: ").strip()
+    strong = 0
+    weak = 0
+
+    for i in range(1, 6):
+        password = input("Password " + str(i) + ": ")
+        reason = ""
+
+        if (password == "12345678" or password == "password" or password == "123456789"
+                or password == "qwerty" or password == "abcdefgh"):
+            reason = "it's one of the most common passwords"
+        elif len(password) < 8:
+            reason = "less than 8 characters"
+        elif password.isdigit():
+            reason = "only numbers"
+        elif password.isalpha():
+            reason = "only letters"
+        elif " " in password:
+            reason = "has a space"
+        elif username != "" and (password.lower() == username.lower() or username.lower() in password.lower()):
+            reason = "too similar to your username"
+
+        if reason == "":
+            print("Strong")
+            strong += 1
+        else:
+            print("Weak ->", reason)
+            weak += 1
+
+    print()
+    print("Strong passwords:", strong)
+    print("Weak passwords:", weak)
+
+
+# ---------- 19 ----------
+elif task == "19":
+    correct_username = "ali_dev"
+    correct_password = "ali12345"
+
+    tries = 0
+    verified = False
+    while tries < 3:
+        username = input("Username: ").strip()
+        current = input("Current password: ")
+
+        if username != correct_username:
+            print("Username is wrong.")
+        elif current != correct_password:
+            print("Current password is wrong.")
+        else:
+            verified = True
+            break
+
+        tries += 1
+        if tries < 3:
+            print("Tries left:", 3 - tries)
+
+    if not verified:
+        print("Too many wrong tries. Try again later.")
+    else:
+        while True:
+            new_password = input("New password: ")
+            has_letter = False
+            has_digit = False
+            for ch in new_password:
+                if ch.isalpha():
+                    has_letter = True
+                elif ch.isdigit():
+                    has_digit = True
+
+            if len(new_password) < 8:
+                print("New password must be at least 8 characters.")
+            elif not has_letter or not has_digit:
+                print("New password needs at least one letter and one number.")
+            elif new_password == correct_password:
+                print("New password can't be the same as the old one.")
+            else:
+                repeat = input("Repeat new password: ")
+                if repeat == new_password:
+                    break
+                print("They don't match. Try again.")
+
+        correct_password = new_password
+        print("Password changed successfully!")
+
+
+# ---------- 20 ----------
+elif task == "20":
+    correct_username = "ali_dev"
+    correct_password = "ali12345"
+    correct_otp = "583214"
+    attempts = 0
+
+    logged_in = False
+    while attempts < 3:
+        username = input("Username: ").strip()
+        password = input("Password: ")
+
+        if username != correct_username or password != correct_password:
+            attempts += 1
+            print("Wrong username or password.")
+            if attempts < 3:
+                print("Attempts left:", 3 - attempts)
+            continue
+
+        print("Username and password are correct. We sent you an OTP code.")
+        otp = input("OTP: ").strip()
+
+        if len(otp) != 6 or not otp.isdigit():
+            attempts += 1
+            print("OTP must be exactly 6 digits.")
+        elif otp != correct_otp:
+            attempts += 1
+            print("Wrong OTP.")
+        else:
+            logged_in = True
+            print("Login successful. Welcome,", username + "!")
+            break
+
+        if attempts < 3:
+            print("Attempts left:", 3 - attempts)
+
+    if not logged_in:
+        print("3 failed attempts. Account locked.")
+
+
+# ---------- 21 ----------
+elif task == "21":
+    while True:
+        print()
+        print("***")
+        print(" MENU")
+        print("***")
+        print("1. Check balance")
+        print("2. Buy phone credit")
+        print("3. Money transfer")
+        print("4. Pay bill")
+        print("5. Exit")
+        choice = input("Your choice: ").strip()
+
+        if choice == "":
+            print("You didn't enter anything.")
+            continue
+        if not choice.isdigit():
+            print("Please enter a number.")
+            continue
+
+        number = int(choice)
+        if number < 1 or number > 5:
+            print("Choose something between 1 and 5.")
+            continue
+
+        if number == 1:
+            print("Showing your balance...")
+        elif number == 2:
+            print("Going to buy credit...")
+        elif number == 3:
+            print("Going to money transfer...")
+        elif number == 4:
+            print("Going to bill payment...")
+        else:
+            print("Goodbye!")
+            break
+
+
+# ---------- 22 ----------
+elif task == "22":
+    total = 0
+    count = 0
+
+    while True:
+        print()
+        print("1. Hamrah-e Aval")
+        print("2. Irancell")
+        print("3. Rightel")
+        print("4. Exit")
+        op = input("Operator: ").strip()
+
+        if op == "4":
+            break
+        if op != "1" and op != "2" and op != "3":
+            print("Only 1, 2 or 3 (or 4 to exit).")
+            continue
+
+        if op == "1":
+            operator_name = "Hamrah-e Aval"
+        elif op == "2":
+            operator_name = "Irancell"
+        else:
+            operator_name = "Rightel"
+
+        while True:
+            amount_text = input("Amount (Toman): ").strip()
+            if amount_text == "":
+                print("Amount can't be empty.")
+            elif not amount_text.isdigit():
+                print("Amount should be a number.")
+            elif int(amount_text) <= 0:
+                print("Amount must be more than zero.")
+            elif int(amount_text) < 1000:
+                print("Minimum is 1000 Toman.")
+            elif int(amount_text) > 100000:
+                print("Maximum is 100000 Toman.")
+            else:
+                break
+
+        amount = int(amount_text)
+        total += amount
+        count += 1
+        print(amount, "Toman credit for", operator_name, "purchased.")
+
+    print()
+    print("Number of purchases:", count)
+    print("Total amount:", total, "Toman")
+
+
+# ---------- 23 ----------
+elif task == "23":
+    my_phone = "09121234567"
+    balance = 2000000
+    correct_pin = "1234"
+
+    total_transferred = 0
+    transfer_count = 0
+
+    while True:
+        print()
+        print("1. Transfer money")
+        print("2. Show balance")
+        print("3. Exit")
+        choice = input("Choose: ").strip()
+
+        if choice == "1":
+            while True:
+                dest = input("Destination number: ").strip()
+                if len(dest) != 11:
+                    print("Number must be 11 digits.")
+                elif not dest.isdigit():
+                    print("Only digits please.")
+                elif not dest.startswith("09"):
+                    print("Number must start with 09.")
+                elif dest == my_phone:
+                    print("You can't transfer to yourself.")
+                else:
+                    break
+
+            while True:
+                amount_text = input("Amount: ").strip()
+                if amount_text == "":
+                    print("Amount can't be empty.")
+                elif not amount_text.isdigit():
+                    print("Amount should be a number.")
+                elif int(amount_text) <= 0:
+                    print("Amount must be more than zero.")
+                else:
+                    break
+
+            amount = int(amount_text)
+            if amount > balance:
+                print("Not enough balance. Transfer cancelled.")
+                continue
+
+            pin_ok = False
+            for t in range(3):
+                pin = input("PIN: ").strip()
+                if len(pin) != 4 or not pin.isdigit():
+                    print("PIN must be 4 digits.")
+                elif pin != correct_pin:
+                    print("Wrong PIN.")
+                else:
+                    pin_ok = True
+                    break
+
+            if not pin_ok:
+                print("Transfer cancelled.")
+                continue
+
+            balance -= amount
+            total_transferred += amount
+            transfer_count += 1
+            print(amount, "transferred to", dest)
+            print("Remaining balance:", balance)
+
+        elif choice == "2":
+            print("Balance:", balance)
+
+        elif choice == "3":
+            break
+
+        else:
+            print("Invalid option.")
+
+    print()
+    print("---- Report ----")
+    print("Number of transfers:", transfer_count)
+    print("Total transferred:", total_transferred)
+    print("Final balance:", balance)
+
+
+# ---------- 24 ----------
+elif task == "24":
+    paid_count = 0
+
+    while True:
+        print()
+        print("1. Pay a bill")
+        print("2. Exit")
+        choice = input("Choose: ").strip()
+
+        if choice == "1":
+            while True:
+                bill_id = input("Bill ID: ")
+                if bill_id == "":
+                    print("Bill ID can't be empty.")
+                elif " " in bill_id:
+                    print("No spaces allowed.")
+                elif not bill_id.isdigit():
+                    print("Only numbers please.")
+                elif len(bill_id) < 6 or len(bill_id) > 15:
+                    print("Bill ID must be between 6 and 15 digits.")
+                else:
+                    break
+
+            while True:
+                pay_id = input("Payment ID: ")
+                if pay_id == "":
+                    print("Payment ID can't be empty.")
+                elif " " in pay_id:
+                    print("No spaces allowed.")
+                elif not pay_id.isdigit():
+                    print("Only numbers please.")
+                elif len(pay_id) < 6 or len(pay_id) > 15:
+                    print("Payment ID must be between 6 and 15 digits.")
+                elif pay_id == bill_id:
+                    print("Payment ID can't be the same as the bill ID.")
+                else:
+                    break
+
+            paid_count += 1
+            print("Bill paid successfully!")
+
+        elif choice == "2":
+            break
+
+        else:
+            print("Invalid option.")
+
+    print("Total bills paid:", paid_count)
+
+
+# ---------- 25 ----------
+elif task == "25":
+    while True:
+        print()
+        print("== Main menu ==")
+        print("1. Account")
+        print("2. Services")
+        print("3. Payment")
+        print("4. Exit")
+        choice = input("Choose: ").strip()
+
+        if choice == "":
+            print("Empty input!")
+            continue
+        if not choice.isdigit():
+            print("Numbers only!")
+            continue
+
+        if choice == "1":
+            while True:
+                print()
+                print("== Account ==")
+                print("1. Show balance")
+                print("2. Show transactions")
+                print("3. Change PIN")
+                print("4. Back")
+                sub = input("Choose: ").strip()
+
+                if sub == "":
+                    print("Empty input!")
+                    continue
+                if not sub.isdigit():
+                    print("Numbers only!")
+                    continue
+
+                if sub == "1":
+                    print("Showing balance...")
+                elif sub == "2":
+                    print("Showing transactions...")
+                elif sub == "3":
+                    print("Changing PIN...")
+                elif sub == "4":
+                    print("Back to main menu.")
+                    break
+                else:
+                    print("That option doesn't exist.")
+
+        elif choice == "2":
+            while True:
+                print()
+                print("== Services ==")
+                print("1. Buy credit")
+                print("2. Money transfer")
+                print("3. Back")
+                sub = input("Choose: ").strip()
+
+                if sub == "":
+                    print("Empty input!")
+                    continue
+                if not sub.isdigit():
+                    print("Numbers only!")
+                    continue
+
+                if sub == "1":
+                    print("Buying credit...")
+                elif sub == "2":
+                    print("Transferring money...")
+                elif sub == "3":
+                    print("Back to main menu.")
+                    break
+                else:
+                    print("That option doesn't exist.")
+
+        elif choice == "3":
+            while True:
+                print()
+                print("== Payment ==")
+                print("1. Pay bill")
+                print("2. Pay internet")
+                print("3. Back")
+                sub = input("Choose: ").strip()
+
+                if sub == "":
+                    print("Empty input!")
+                    continue
+                if not sub.isdigit():
+                    print("Numbers only!")
+                    continue
+
+                if sub == "1":
+                    print("Paying bill...")
+                elif sub == "2":
+                    print("Paying internet...")
+                elif sub == "3":
+                    print("Back to main menu.")
+                    break
+                else:
+                    print("That option doesn't exist.")
+
+        elif choice == "4":
+            print("Goodbye!")
+            break
+
+        else:
+            print("That option doesn't exist.")
+
+
+# ---------- 26 ----------
+elif task == "26":
+    name1 = "Ali"
+    phone1 = "09121111111"
+    name2 = "Sara"
+    phone2 = "09122222222"
+    name3 = "Reza"
+    phone3 = "09123333333"
+    name4 = "Maryam"
+    phone4 = "09124444444"
+    name5 = "Hamed"
+    phone5 = "09125555555"
+
+    found = 0
+    not_found = 0
+
+    while True:
+        search = input("Search a name (exit to quit): ").strip()
+
+        if search == "":
+            print("Type something first.")
+            continue
+
+        s = search.lower()
+        if s == "exit":
+            break
+
+        if s == name1.lower():
+            print(name1, "->", phone1)
+            found += 1
+        elif s == name2.lower():
+            print(name2, "->", phone2)
+            found += 1
+        elif s == name3.lower():
+            print(name3, "->", phone3)
+            found += 1
+        elif s == name4.lower():
+            print(name4, "->", phone4)
+            found += 1
+        elif s == name5.lower():
+            print(name5, "->", phone5)
+            found += 1
+        else:
+            print("Sorry, no contact named", search)
+            not_found += 1
+
+    print()
+    print("Successful searches:", found)
+    print("Unsuccessful searches:", not_found)
+
+
+# ---------- 27 ----------
+elif task == "27":
+    name = "Sara Karimi"
+    phone = "09351234567"
+    email = "sara.k@yahoo.com"
+
+    while True:
+        print()
+        print("1. Edit name")
+        print("2. Edit phone")
+        print("3. Edit email")
+        print("4. Show current info")
+        print("5. Exit")
+        choice = input("Choose: ").strip()
+
+        if choice == "1":
+            new_name = input("New name (empty = keep): ").strip()
+            if new_name == "":
+                print("Kept the old name.")
+            else:
+                has_digit = False
+                for ch in new_name:
+                    if ch.isdigit():
+                        has_digit = True
+                if has_digit or len(new_name) < 3:
+                    print("Invalid name. Old name kept.")
+                else:
+                    name = new_name
+                    print("Name changed.")
+
+        elif choice == "2":
+            new_phone = input("New phone (empty = keep): ").strip()
+            if new_phone == "":
+                print("Kept the old phone.")
+            elif len(new_phone) == 11 and new_phone.isdigit() and new_phone.startswith("09"):
+                phone = new_phone
+                print("Phone changed.")
+            else:
+                print("Invalid phone. Old phone kept.")
+
+        elif choice == "3":
+            new_email = input("New email (empty = keep): ").strip()
+            if new_email == "":
+                print("Kept the old email.")
+            else:
+                at_index = new_email.find("@")
+                if (new_email.count("@") == 1 and " " not in new_email
+                        and new_email[0] != "@" and new_email[0] != "."
+                        and new_email[-1] != "@" and new_email[-1] != "."
+                        and "." in new_email[at_index + 1:]):
+                    email = new_email
+                    print("Email changed.")
+                else:
+                    print("Invalid email. Old email kept.")
+
+        elif choice == "4":
+            print("Name: ", name)
+            print("Phone:", phone)
+            print("Email:", email)
+
+        elif choice == "5":
+            print("Bye!")
+            break
+
+        else:
+            print("Invalid option.")
+
+
+# ---------- 28 ----------
+elif task == "28":
+    name1 = "Ali"
+    phone1 = "09121111111"
+    name2 = "Sara"
+    phone2 = "09122222222"
+    name3 = "Reza"
+    phone3 = "09123333333"
+    name4 = "Maryam"
+    phone4 = "09124444444"
+    name5 = "Hamed"
+    phone5 = "09125555555"
+
+    while True:
+        print()
+        print("Contacts:", name1, name2, name3, name4, name5)
+        target = input("Name to delete (exit to quit): ").strip()
+
+        if target == "":
+            print("Type a name.")
+            continue
+        if target.lower() == "exit":
+            print("Bye!")
+            break
+
+        t = target.lower()
+        which = 0
+        if name1 != "" and t == name1.lower():
+            which = 1
+        elif name2 != "" and t == name2.lower():
+            which = 2
+        elif name3 != "" and t == name3.lower():
+            which = 3
+        elif name4 != "" and t == name4.lower():
+            which = 4
+        elif name5 != "" and t == name5.lower():
+            which = 5
+
+        if which == 0:
+            print("Contact not found.")
+            continue
+
+        while True:
+            answer = input("Delete " + target + "? (y/n): ")
+            if answer == "y" or answer == "Y" or answer == "n" or answer == "N":
+                break
+            print("Invalid answer, only y or n.")
+
+        if answer == "n" or answer == "N":
+            print("Cancelled.")
+            continue
+
+        if which == 1:
+            name1 = ""
+            phone1 = ""
+        elif which == 2:
+            name2 = ""
+            phone2 = ""
+        elif which == 3:
+            name3 = ""
+            phone3 = ""
+        elif which == 4:
+            name4 = ""
+            phone4 = ""
+        else:
+            name5 = ""
+            phone5 = ""
+        print("Deleted.")
+
+
+# ---------- 29 ----------
+elif task == "29":
+    name1 = ""
+    phone1 = ""
+    email1 = ""
+    user1 = ""
+    pass1 = ""
+    pin1 = ""
+    fails1 = 0
+
+    name2 = ""
+    phone2 = ""
+    email2 = ""
+    user2 = ""
+    pass2 = ""
+    pin2 = ""
+    fails2 = 0
+
+    name3 = ""
+    phone3 = ""
+    email3 = ""
+    user3 = ""
+    pass3 = ""
+    pin3 = ""
+    fails3 = 0
+
+    count = 0
+
+    while True:
+        print()
+        print("1. Sign up")
+        print("2. Log in")
+        print("3. Exit")
+        choice = input("Choose: ").strip()
+
+        if choice == "1":
+            if count == 3:
+                print("Sorry, only 3 users can sign up.")
+                continue
+
+            while True:
+                name = input("Name: ").strip()
+                has_digit = False
+                for ch in name:
+                    if ch.isdigit():
+                        has_digit = True
+                if name == "":
+                    print("Name can't be empty.")
+                elif len(name) < 3:
+                    print("Name must be at least 3 characters.")
+                elif has_digit:
+                    print("Name can't have numbers.")
+                else:
+                    break
+
+            while True:
+                phone = input("Phone: ").strip()
+                if len(phone) != 11:
+                    print("Phone must be 11 digits.")
+                elif not phone.isdigit():
+                    print("Phone should only have digits.")
+                elif not phone.startswith("09"):
+                    print("Phone must start with 09.")
+                else:
+                    break
+
+            while True:
+                email = input("Email: ").strip()
+                if email == "":
+                    print("Email can't be empty.")
+                    continue
+                at_index = email.find("@")
+                if email.count("@") != 1:
+                    print("Email must have exactly one @.")
+                elif "." not in email:
+                    print("Email must have a dot.")
+                elif " " in email:
+                    print("Email can't have spaces.")
+                elif email[0] == "@" or email[0] == ".":
+                    print("Email can't start with @ or dot.")
+                elif email[-1] == "@" or email[-1] == ".":
+                    print("Email can't end with @ or dot.")
+                elif "." not in email[at_index + 1:]:
+                    print("There should be a dot after the @.")
+                else:
+                    break
+
+            while True:
+                username = input("Username: ").strip()
+                if len(username) < 5 or len(username) > 20:
+                    print("Username must be 5 to 20 characters.")
+                elif " " in username:
+                    print("Username can't have spaces.")
+                elif username[0].isdigit():
+                    print("Username can't start with a number.")
+                elif username == user1 or username == user2 or username == user3:
+                    print("This username is taken.")
+                else:
+                    break
+
+            while True:
+                password = input("Password: ")
+                has_letter = False
+                has_digit = False
+                has_upper = False
+                has_lower = False
+                has_special = False
+                has_space = False
+                for ch in password:
+                    if ch.isalpha():
+                        has_letter = True
+                        if ch.isupper():
+                            has_upper = True
+                        else:
+                            has_lower = True
+                    elif ch.isdigit():
+                        has_digit = True
+                    elif ch == " ":
+                        has_space = True
+                    else:
+                        has_special = True
+
+                if len(password) < 8:
+                    print("Password must be at least 8 characters.")
+                elif has_space:
+                    print("Password can't have spaces.")
+                elif not has_letter:
+                    print("Password needs letters.")
+                elif not has_digit:
+                    print("Password needs a number.")
+                elif not has_upper:
+                    print("Password needs an uppercase letter.")
+                elif not has_lower:
+                    print("Password needs a lowercase letter.")
+                elif not has_special:
+                    print("Password needs a special character (like @ or #).")
+                else:
+                    confirm = input("Confirm password: ")
+                    if confirm == password:
+                        break
+                    print("Passwords don't match. Enter the password again.")
+
+            while True:
+                pin = input("PIN (4 digits): ").strip()
+                repeated = False
+                for ch in pin:
+                    if pin.count(ch) > 1:
+                        repeated = True
+
+                if len(pin) != 4:
+                    print("PIN must be exactly 4 digits.")
+                elif not pin.isdigit():
+                    print("PIN should only have numbers.")
+                elif repeated:
+                    print("PIN can't have repeated digits.")
+                elif pin == password:
+                    print("PIN can't be the same as the password.")
+                else:
+                    break
+
+            count += 1
+            if count == 1:
+                name1 = name
+                phone1 = phone
+                email1 = email
+                user1 = username
+                pass1 = password
+                pin1 = pin
+            elif count == 2:
+                name2 = name
+                phone2 = phone
+                email2 = email
+                user2 = username
+                pass2 = password
+                pin2 = pin
+            else:
+                name3 = name
+                phone3 = phone
+                email3 = email
+                user3 = username
+                pass3 = password
+                pin3 = pin
+            print("Signed up successfully! Now you can log in.")
+
+        elif choice == "2":
+            if count == 0:
+                print("No one has signed up yet.")
+                continue
+
+            while True:
+                username = input("Username (or back): ").strip()
+                if username == "back":
+                    break
+                password = input("Password: ")
+
+                which = 0
+                if username != "" and username == user1:
+                    which = 1
+                elif username != "" and username == user2:
+                    which = 2
+                elif username != "" and username == user3:
+                    which = 3
+
+                if which == 0:
+                    print("No account with this username.")
+                    continue
+
+                if which == 1:
+                    real_pass = pass1
+                    real_name = name1
+                    fails = fails1
+                elif which == 2:
+                    real_pass = pass2
+                    real_name = name2
+                    fails = fails2
+                else:
+                    real_pass = pass3
+                    real_name = name3
+                    fails = fails3
+
+                if fails >= 3:
+                    print("This account is locked.")
+                    continue
+
+                if password == real_pass:
+                    print("Welcome,", real_name + "! Glad to see you.")
+                    break
+
+                fails += 1
+                if which == 1:
+                    fails1 = fails
+                elif which == 2:
+                    fails2 = fails
+                else:
+                    fails3 = fails
+
+                if fails == 3:
+                    print("Wrong password. This account is locked now.")
+                else:
+                    print("Wrong password. Attempts left:", 3 - fails)
+
+        elif choice == "3":
+            print("Bye!")
+            break
+
+        else:
+            print("Invalid option.")
+
+
+# ---------- 30 ----------
+elif task == "30":
+    correct_username = "student123"
+    correct_password = "Python@123"
+    correct_pin = "2580"
+    owner_phone = "09121234567"
+
+    balance = 500000
+    attempts = 0
+
+    deposit_count = 0
+    withdraw_count = 0
+    transfer_count = 0
+    deposit_total = 0
+    withdraw_total = 0
+    transfer_total = 0
+
+    logged_in = False
+    while attempts < 3:
+        username = input("Username: ").strip()
+        password = input("Password: ")
+
+        if username == correct_username and password == correct_password:
+            logged_in = True
+            print("Login successful!")
+            break
+
+        attempts += 1
+        print("Wrong username or password.")
+        if attempts < 3:
+            print("Attempts left:", 3 - attempts)
+
+    if not logged_in:
+        print("Too many failed attempts. Account locked.")
+    else:
+        while True:
+            print()
+            print("** BANK SYSTEM **")
+            print("1. Show balance")
+            print("2. Deposit")
+            print("3. Withdraw")
+            print("4. Transfer")
+            print("5. Change password")
+            print("6. Change PIN")
+            print("7. Transactions report")
+            print("8. Exit")
+            choice = input("Choose: ").strip()
+
+            if choice == "1":
+                print("Your balance:", balance)
+
+            elif choice == "2":
+                amount_text = input("Deposit amount: ").strip()
+                if amount_text == "":
+                    print("Amount can't be empty.")
+                elif not amount_text.isdigit():
+                    print("Amount should be a number.")
+                elif int(amount_text) <= 0:
+                    print("Amount must be more than zero.")
+                else:
+                    amount = int(amount_text)
+                    balance += amount
+                    deposit_count += 1
+                    deposit_total += amount
+                    print("Deposit done. New balance:", balance)
+
+            elif choice == "3":
+                amount_text = input("Withdraw amount: ").strip()
+                if amount_text == "":
+                    print("Amount can't be empty.")
+                elif not amount_text.isdigit():
+                    print("Amount should be a number.")
+                elif int(amount_text) <= 0:
+                    print("Amount must be more than zero.")
+                elif int(amount_text) > balance:
+                    print("Not enough balance.")
+                else:
+                    pin = input("PIN: ").strip()
+                    if len(pin) != 4 or not pin.isdigit():
+                        print("PIN must be 4 digits. Withdraw cancelled.")
+                    elif pin != correct_pin:
+                        print("Wrong PIN. Withdraw cancelled.")
+                    else:
+                        amount = int(amount_text)
+                        balance -= amount
+                        withdraw_count += 1
+                        withdraw_total += amount
+                        print("Withdraw done. New balance:", balance)
+
+            elif choice == "4":
+                dest = input("Destination phone number: ").strip()
+                if len(dest) != 11 or not dest.isdigit() or not dest.startswith("09"):
+                    print("Invalid number. It must be 11 digits and start with 09.")
+                    continue
+                if dest == owner_phone:
+                    print("You can't transfer to your own number.")
+                    continue
+
+                amount_text = input("Amount: ").strip()
+                if amount_text == "" or not amount_text.isdigit() or int(amount_text) <= 0:
+                    print("Invalid amount.")
+                    continue
+                amount = int(amount_text)
+                if amount > balance:
+                    print("Not enough balance.")
+                    continue
+
+                pin = input("PIN: ").strip()
+                if pin != correct_pin:
+                    print("Wrong PIN. Transfer cancelled.")
+                    continue
+
+                balance -= amount
+                transfer_count += 1
+                transfer_total += amount
+                print(amount, "transferred to", dest + ". New balance:", balance)
+
+            elif choice == "5":
+                current = input("Current password: ")
+                if current != correct_password:
+                    print("Current password is wrong.")
+                    continue
+
+                new_password = input("New password: ")
+                has_letter = False
+                has_digit = False
+                for ch in new_password:
+                    if ch.isalpha():
+                        has_letter = True
+                    elif ch.isdigit():
+                        has_digit = True
+
+                if len(new_password) < 8:
+                    print("New password must be at least 8 characters.")
+                elif not has_letter or not has_digit:
+                    print("New password needs at least one letter and one number.")
+                elif new_password == correct_password:
+                    print("New password can't be the same as the old one.")
+                else:
+                    repeat = input("Repeat new password: ")
+                    if repeat != new_password:
+                        print("Passwords don't match. Nothing changed.")
+                    else:
+                        correct_password = new_password
+                        print("Password changed.")
+
+            elif choice == "6":
+                current_pin = input("Current PIN: ").strip()
+                if current_pin != correct_pin:
+                    print("Current PIN is wrong.")
+                    continue
+
+                new_pin = input("New PIN: ").strip()
+                if len(new_pin) != 4:
+                    print("PIN must be exactly 4 digits.")
+                elif not new_pin.isdigit():
+                    print("PIN should only have numbers.")
+                elif new_pin.count(new_pin[0]) == 4:
+                    print("PIN digits can't all be the same.")
+                elif new_pin == correct_pin:
+                    print("New PIN can't be the same as the old one.")
+                else:
+                    repeat_pin = input("Repeat new PIN: ").strip()
+                    if repeat_pin != new_pin:
+                        print("PINs don't match. Nothing changed.")
+                    else:
+                        correct_pin = new_pin
+                        print("PIN changed.")
+
+            elif choice == "7":
+                print("---- Transactions report ----")
+                print("Deposits: ", deposit_count, "| total:", deposit_total)
+                print("Withdraws:", withdraw_count, "| total:", withdraw_total)
+                print("Transfers:", transfer_count, "| total:", transfer_total)
+
+            elif choice == "8":
+                print("You've logged out of your account. Bye!")
+                break
+
+            else:
+                print("Invalid option. Choose 1 to 8.")
+
+        print("Final balance:", balance)
+
+
+else:
+    print("There's no task with this number. Run it again and choose 1 to 30.")
